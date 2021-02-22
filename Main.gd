@@ -41,31 +41,31 @@ func _on_request_completed(result, response_code, headers, body):
 	if sats.size() < 1:
 		for sat in data:
 			var newSat = sat_tempate.instance()
-			newSat.name = sat[0]
-			newSat.sat_name = sat[0]
-			newSat.velocity_x = sat[4]
-			newSat.velocity_y = sat[5]
-			newSat.velocity_z = sat[6]
+			newSat.name = sat["name"]
+			newSat.sat_name = sat["name"]
+			newSat.velocity_x = sat["v_x"]
+			newSat.velocity_y = sat["v_y"]
+			newSat.velocity_z = sat["v_z"]
 			self.add_child(newSat)
-			newSat.global_transform.origin = Vector3(-sat[1]/zoom,sat[3]/zoom, sat[2]/zoom)
+			newSat.global_transform.origin = Vector3(-sat["p_x"]/zoom,sat["p_z"]/zoom, sat["p_y"]/zoom)
 			sats[newSat.name] = newSat
 	else:
 		for sat in data:
-			if(sats.has(sat[0])):
-				var update_sat = sats[sat[0]]
-				update_sat.global_transform.origin = Vector3(-sat[1]/zoom,sat[3]/zoom, sat[2]/zoom)
-				update_sat.velocity_x = sat[4]
-				update_sat.velocity_y = sat[5]
-				update_sat.velocity_z = sat[6]
+			if(sats.has(sat["name"])):
+				var update_sat = sats[sat["name"]]
+				update_sat.global_transform.origin = Vector3(-sat["p_x"]/zoom,sat["p_z"]/zoom, sat["p_y"]/zoom)
+				update_sat.velocity_x = sat["v_x"]
+				update_sat.velocity_y = sat["v_y"]
+				update_sat.velocity_z = sat["v_z"]
 			else:
 				var newSat = sat_tempate.instance()
-				newSat.name = sat[0]
-				newSat.sat_name = sat[0]
-				newSat.velocity_x = sat[4]
-				newSat.velocity_y = sat[5]
-				newSat.velocity_z = sat[6]
+				newSat.name = sat["name"]
+				newSat.sat_name = sat["name"]
+				newSat.velocity_x = sat["v_x"]
+				newSat.velocity_y = sat["v_y"]
+				newSat.velocity_z = sat["v_z"]
 				self.add_child(newSat)
-				newSat.global_transform.origin = Vector3(-sat[1]/zoom,sat[3]/zoom, sat[2]/zoom)
+				newSat.global_transform.origin = Vector3(-sat["p_x"]/zoom,sat["p_z"]/zoom, sat["p_y"]/zoom)
 				sats[newSat.name] = newSat
 	httpRequest.request("http://127.0.0.1:5000/")
 	

@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://Earth.tscn" type="PackedScene" id=2]
 [ext_resource path="res://CameraGimbal.gd" type="Script" id=3]
+
+[sub_resource type="Environment" id=1]
+background_mode = 1
+ambient_light_color = Color( 1, 1, 1, 1 )
+ambient_light_energy = 2.0
 
 [node name="Main" type="Spatial"]
 script = ExtResource( 1 )
@@ -25,4 +30,7 @@ current = true
 far = 10000.0
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 1 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
